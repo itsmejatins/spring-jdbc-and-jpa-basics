@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import springjdbcjpa.springjdbcjpabasics.entity.Person;
 
-@Repository
+//@Repository
 public class PersonJdbcDao {
 
 	static class PersonRowMapper implements RowMapper<Person> {

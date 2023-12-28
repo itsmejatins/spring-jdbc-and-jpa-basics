@@ -12,7 +12,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import springjdbcjpa.springjdbcjpabasics.entity.Person;
 import springjdbcjpa.springjdbcjpabasics.jdbc.PersonJdbcDao;
 
-@SpringBootApplication
+//@SpringBootApplication
 public class SpringJdbcDemoApplication implements CommandLineRunner {
 
 	@Autowired

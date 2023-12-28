@@ -2,12 +2,26 @@ package springjdbcjpa.springjdbcjpabasics.entity;
 
 import java.util.Date;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "Person")
+@NamedQuery(name = "find_all_persons", query = "SELECT p FROM Person p")
 public class Person {
 
+	@Id
+	@GeneratedValue
 	private int id;
 
+	@Column(name = "name")
 	private String name;
 	private String location;
+	@Column(name = "birthdate")
 	private Date birthDate;
 
 	public String getName() {
@@ -49,9 +63,14 @@ public class Person {
 		this.location = location;
 		this.birthDate = birthDate;
 	}
+	public Person( String name, String location, Date birthDate) {
+		this.name = name;
+		this.location = location;
+		this.birthDate = birthDate;
+	}
 
 	public Person() {
-		// TODO Auto-generated constructor stub
+		// for hibernate
 	}
 
 	@Override

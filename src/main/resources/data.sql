@@ -1,10 +1,11 @@
-CREATE TABLE Person (
-	id integer NOT NULL,
-	name varchar(255) NOT NULL,
-	location varchar(255) NOT null,
-	birthDate timestamp,
-	PRIMARY KEY(id)
-);
+----CREATE TABLE Person (
+----	id integer NOT NULL,
+----	name varchar(255) NOT NULL,
+----	location varchar(255) NOT null,
+----	birthDate timestamp,
+----	PRIMARY KEY(id)
+----);
+
 
 
 INSERT INTO Person (id, name, location, birthDate) 
