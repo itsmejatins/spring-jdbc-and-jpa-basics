@@ -2,6 +2,8 @@ package springjdbcjpa.springjdbcjpabasics.jpa;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
@@ -14,8 +16,9 @@ import springjdbcjpa.springjdbcjpabasics.entity.Person;
 @Transactional
 public class PersonRepository {
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 	@PersistenceContext
-	EntityManager em;
+	private EntityManager em;
 
 	public List<Person> findAll() {
 		TypedQuery<Person> namedQuery = em.createNamedQuery("find_all_persons", Person.class);
@@ -28,7 +31,8 @@ public class PersonRepository {
 	}
 
 	public void insert(Person p) {
-		em.merge(p);  // don't use em.persist() -> InvalidDataAccessApiUsageException: detached entity passed to persist
+		em.merge(p); // don't use em.persist() -> InvalidDataAccessApiUsageException: detached entity
+						// passed to persist
 	}
 
 	public void update(Person p) {
@@ -45,12 +49,18 @@ public class PersonRepository {
 	public void delete(Person p) {
 		p = findById(p.getId()); // as p is a detached entity, you need to fetch it again so that entity manager
 									// can manage it.
-		em.remove(p);
+		if (p != null)
+			em.remove(p);
+		else
+			logger.warn("Attempted to delete a non-existent person");
 	}
 
 	public void deleteById(int id) {
-		Person toDelete = findById(id);
-		em.remove(toDelete);
+		Person p = findById(id);
+		if (p != null)
+			em.remove(p);
+		else
+			logger.warn("Attempted to delete a non-existent person");
 	}
 
 }
